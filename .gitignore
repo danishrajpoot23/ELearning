@@ -1,0 +1,21 @@
+# ===== Ignore environment files =====
+backend/.env
+frontend/.env
+
+# ===== Ignore dependencies =====
+backend/node_modules/
+frontend/node_modules/
+
+# ===== Ignore build/dist folders =====
+frontend/dist/
+backend/build/
+backend/tmp/
+
+# ===== Optional (logs, cache, etc.) =====
+*.log
+*.cache
+.DS_Store
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local

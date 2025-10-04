@@ -1,0 +1,95 @@
+/* Floating Action Button Styles - migrated with Tailwind via @apply */
+
+.fab-container { @apply fixed bottom-8 right-8 z-[1000]; }
+
+/* Main FAB */
+.fab-main { @apply w-[60px] h-[60px] rounded-full border-0 cursor-pointer relative overflow-hidden shadow-[0_4px_20px_rgba(251,191,36,0.4)]; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); background: linear-gradient(135deg, #f97316, #ea580c); }
+
+.fab-main:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6); }
+
+.fab-main.expanded { transform: rotate(45deg); background: linear-gradient(135deg, #dc2626, #b91c1c); }
+.fab-main.expanded:hover { transform: rotate(45deg) scale(1.1); }
+
+/* FAB Icon */
+.fab-icon { @apply flex items-center justify-center w-full h-full text-white text-[1.5rem] transition-all duration-300 ease-linear; }
+
+.fab-svg { @apply w-6 h-6; transition: transform 0.3s ease; }
+.fab-svg.rotated { transform: rotate(45deg); }
+
+/* Glow effect */
+.fab-glow { @apply absolute inset-0 opacity-0 rounded-full; transition: opacity 0.3s ease; background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%); }
+.fab-main:hover .fab-glow { opacity: 1; animation: fabGlow 2s ease-in-out infinite; }
+
+@keyframes fabGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+/* Ripple effect */
+.fab-ripple { @apply absolute top-1/2 left-1/2 rounded-full; width: 0; height: 0; transform: translate(-50%, -50%); transition: width 0.6s ease, height 0.6s ease; background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%); }
+.fab-main:active .fab-ripple { width: 200px; height: 200px; }
+
+/* FAB Actions */
+.fab-actions { @apply absolute right-0 flex flex-col gap-4 opacity-0 invisible; bottom: 70px; transform: translateY(20px) scale(0.8); transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.fab-actions.visible { @apply opacity-100 visible; transform: translateY(0) scale(1); }
+
+/* Individual FAB Action */
+
+.fab-action { @apply flex items-center gap-3 px-3 py-3 border-0 rounded-[2rem] cursor-pointer transition-all duration-300 ease-linear shadow-[0_4px_15px_rgba(0,0,0,0.1)]; background: rgba(255, 255, 255, 0.95); transform: translateX(20px); opacity: 0; }
+.fab-actions.visible .fab-action { transform: translateX(0); opacity: 1; }
+
+.fab-actions.visible .fab-action:nth-child(1) { transition-delay: 0.1s; }
+.fab-actions.visible .fab-action:nth-child(2) { transition-delay: 0.2s; }
+.fab-actions.visible .fab-action:nth-child(3) { transition-delay: 0.3s; }
+.fab-actions.visible .fab-action:nth-child(4) { transition-delay: 0.4s; }
+
+.fab-action:hover { transform: translateX(-5px) scale(1.05); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); background: rgba(255, 255, 255, 1); }
+
+.fab-action-icon { @apply text-xl; transition: transform 0.3s ease; }
+.fab-action:hover .fab-action-icon { transform: scale(1.2); }
+
+.fab-action-label { @apply text-[#374151] font-medium text-sm whitespace-nowrap; }
+
+/* Background overlay */
+.fab-overlay { @apply fixed inset-0 opacity-0 invisible; transition: all 0.3s ease; z-index: -1; background: rgba(0, 0, 0, 0.3); }
+.fab-overlay.visible { @apply opacity-100 visible; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fab-container { @apply bottom-4 right-4; }
+  .fab-main { @apply w-[50px] h-[50px]; }
+  .fab-svg { @apply w-5 h-5; }
+  .fab-actions { @apply right-[-10px]; bottom: 60px; }
+  .fab-action { @apply px-3 py-2 text-sm; }
+  .fab-action-label { @apply text-xs; }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .fab-action { background: rgba(31, 41, 55, 0.95); color: #fff; }
+  .fab-action-label { color: #e5e7eb; }
+  .fab-action:hover { background: rgba(31, 41, 55, 1); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .fab-main,
+  .fab-actions,
+  .fab-action {
+    transition: none;
+  }
+  
+  .fab-main:hover {
+    transform: none;
+  }
+  
+  .fab-action:hover {
+    transform: none;
+  }
+}
